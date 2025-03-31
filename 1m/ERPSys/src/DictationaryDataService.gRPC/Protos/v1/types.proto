@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "DictationaryDataService.gRPC";
+
+package DictationaryDataService.v1;
+
+message RequisiteProperty
+{
+  string Name=1;
+  string RequisiteType =2;
+}
+
+message  Requisite
+{
+  int32  Id =1;
+  string Name =2;
+  string RequisiteType =3;
+  string Value =4;
+}
+message  DictationaryDataItem
+{
+  int32 Id=1;
+  repeated Requisite Requisites =2;
+}
+
+message  DictationaryData
+{
+  repeated RequisiteProperty RequisiteProperties =1;
+  
+}
+
