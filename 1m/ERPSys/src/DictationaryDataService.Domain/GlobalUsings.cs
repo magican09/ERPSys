@@ -1,6 +1,0 @@
-global using DictationaryDataService.Domain.Events;
-global using DictationaryDataService.Domain.SeedWork;
-global using System.Reflection;
-global using DictationaryDataService.Domain.AggregatesModel.DictationaryDataAggregate;
-global using DictationaryDataService.Domain.AggregatesModel.DictationaryDataItemAggregate.Requisites;
-global using DictationaryDataService.Domain.AggregatesModel.DictationaryDataAggregate.RequisiteProperties;

@@ -1,5 +1,0 @@
-global using DictationaryDataService.Domain.AggregatesModel.DictationaryDataAggregate;
-global using DictationaryDataService.Domain.AggregatesModel.DictationaryDataItemAggregate;
-global using MediatR;
-global using Microsoft.EntityFrameworkCore;
-global using Microsoft.EntityFrameworkCore.Storage;
