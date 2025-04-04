@@ -1,12 +1,13 @@
+
 namespace Catalogs.Domain.AggregateModel.CatalogRecordItemAggregate.Attributes;
 
 
-public interface IAttribute//:IEntity
+public interface IAttribute
 {
     Type Type { get; }
     Type ValueType { get; }
     string Name { get; }
+    Type DescriptionType { get; }
     
-    public object? Value { get; }
     
 }

@@ -1,6 +1,7 @@
 namespace Catalogs.Domain.AggregateModel.CatalogAggregate.AttributeDescriptions;
 
-public class StringAttributeDescription:AttributeDescription
+public class StringAttributeDescription:AttributeDescription<StringAttribute>
 {
-    public StringAttributeDescription():base(typeof(StringAttribute)) { }
+    public StringAttributeDescription(){ }
+    public StringAttributeDescription(IAttribute attribute):base(attribute) { }
 }

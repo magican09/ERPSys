@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option csharp_namespace = "Catalog.gRPC.v1";
+import "Protos/v1/types.proto";
+import "google/protobuf/any.proto";
+
+package Catalog.v1;
+
+message AttributeDescription
+{
+  string Id= 1;
+  string AttributeType =2;
+  string AttributeName=3;
+  string  Description =4;
+  string Synonym =5;
+  map<string,string> Properties =6;
+}
+
+message Catalog{ 
+  string Id=1;
+  string Name =2;
+  string Synonym =3;
+  bool UseStandardCommands =4;
+  string Code =5;
+  string Description =6;
+  string CreateOnInput =7;
+  string DataLockControlMode =8;
+  string FullTextSearch =9;
+  int32 LevelCount =10;
+   bool FoldersOnTop =11;
+  int32 CodeLength=12;
+  int32 DescriptionLength =13;
+  string CodeType =14;
+  int32 CodeAllowedLength=15;
+  bool CheckUnique =16;
+  bool Autonumbering =17;
+  string DefaultPresentation =18;
+  string EditType =19;
+  string ChoiceMode =20;
+  repeated  AttributeDescription AttributeDescriptions =21;
+  }
+
+message  CatalogCreationRequest {
+  string Name =1;
+  string Synonym =2;
+  bool UseStandardCommands =3;
+  string Code =4;
+  string Description =5;
+  string CreateOnInput =6;
+  string DataLockControlMode =7;
+  string FullTextSearch =8;
+  int32 LevelCount =9;
+  bool FoldersOnTop =10;
+  int32 CodeLength=11;
+  int32 DescriptionLength =12;
+  string CodeType =13;
+  int32 CodeAllowedLength=14;
+  bool CheckUnique =15;
+  bool Autonumbering =16;
+  string DefaultPresentation =17;
+  string EditType =18;
+  string ChoiceMode =19;
+  repeated  AttributeDescription AttributeDescriptions =20;
+    }
+    
+message  CatalogCreationReqply{
+  string  Id =1;
+  string  Name =2;
+}
+
+message AddingAttributeRequest{
+ 
+  string AttributeType =1;
+  string AttributeName=2;
+  string  Description =3;
+  string Synonym =4;
+  map<string,string> Properties =5;
+}
+
+message AddingAttributeReply{
+
+  string id =1;
+  string CatalogItemId=2;
+
+}
