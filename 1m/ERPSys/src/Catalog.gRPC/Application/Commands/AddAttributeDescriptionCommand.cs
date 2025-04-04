@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Catalog.gRPC.Application.Commands;
 
-public class AddAttributeDescriptionCommand:IRequest<int>
+public class AddAttributeDescriptionCommand:IRequest<(int,int)>
 {
     public AttributeDescriptionDTO AttributeDescription { get; init; }
 

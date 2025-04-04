@@ -88,6 +88,7 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
                nameof(requestCreateCatalog.Id),
                requestCreateCatalog.Id,
                requestCreateCatalog);
+           
            var result = await services.Mediator.Send(requestCreateCatalog);
 
            if (result!= default(int))
@@ -143,13 +144,39 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
                       .ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
               };
               var addAttributeDescriptionCommand = new AddAttributeDescriptionCommand(attributeDescription);
+                
+              var requestAddAttributeDescription= new IdentifiedCommand<AddAttributeDescriptionCommand,(int,int)>
+                                                                                    (addAttributeDescriptionCommand, requestId);
+            
+              services.Logger.LogInformation(
+                  "Sending command:{CommandName} - {IdProperty}: {CommandId} ({@Command})",
+                  requestAddAttributeDescription.GetGenericTypeName(),
+                  nameof(requestAddAttributeDescription.Id),
+                  requestAddAttributeDescription.Id,
+                  requestAddAttributeDescription);
+    
+                var result = await services.Mediator.Send(requestAddAttributeDescription);
+
+                if (result.Item1 != default(int) && result.Item2 != default(int))
+                {
+                    services.Logger.LogInformation("CreateOrderCommand succeeded - RequestId: {RequestId}", requestId);
+                }
+                else
+                {
+                    services.Logger.LogWarning("CreateOrderCommand failed - RequestId: {RequestId}", requestId);
+                }
+
+                await responseStream.WriteAsync(new AddingAttributeReply
+                {
+                    Id = result.ToString(),
+                    CatalogItemId = result.Item2.ToString(),
+                });
 
           }
           
           
       }
-      
-
-      return base.AddAttribute(requestStream, responseStream, context);
+   
+     
   }
 }
