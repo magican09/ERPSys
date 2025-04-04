@@ -142,7 +142,7 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
                           new KeyValuePair<string, string>(p.Key, p.Value))
                       .ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
               };
-                var addAttributeDescriptionCommand = new Iid              
+              var addAttributeDescriptionCommand = new AddAttributeDescriptionCommand(attributeDescription);
 
           }
           
