@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option csharp_namespace = "Catalog.gRPC.v1";
+
+package Catalog.v1;
+
+
+ 

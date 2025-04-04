@@ -1,19 +1,27 @@
 namespace Catalogs.Domain.AggregateModel.CatalogAggregate.AttributeDescriptions;
 
-public  abstract class AttributeDescription:Entity,IAttributeDescription
+public  abstract class AttributeDescription<T>:Entity, IAttributeDescription where T : IAttribute
 {
-    public string Name { get; internal set; }
-    public string? Description { get; internal set; }
-    public string? Synonym { get; internal set; }
-    public  Type AttributeType { get; internal set; }
+    public string AttributeName { get;  set; }
+    public string? Description { get;  set; }
+    public string? Synonym { get;  set; }
+    public Type Type => this.GetType(); 
+    public  Type AttributeType { get; internal set; } = typeof(T);
 
     public AttributeDescription()
     {
         
     }
-    public AttributeDescription(Type attributeType ):this()
+    public AttributeDescription(IAttribute attribute)
     {
-        AttributeType = attributeType;
+        
+        AttributeName = attribute.Name; ;
+      
     }
-  //  public Type ValueType { get; internal set; }
+
+    public AttributeDescription(string attributeName)
+    {
+        AttributeName = attributeName;
+    }
+     
 }

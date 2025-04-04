@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Catalog.gRPC.v1";
+
+package Catalog.v1;
+
+import "Protos/v1/types.proto";
+import "Protos/v1/catalog_types.proto";
+import "Protos/v1/catalog_record_types.proto";
+
+import "google/protobuf/any.proto";
+
+service CatalogService
+{
+  rpc CreateCatalod(stream CatalogCreationRequest) returns (stream CatalogCreationReqply);
+  rpc AddAttribute(stream AddingAttributeRequest) returns (stream AddingAttributeReply);
+  //rpc CreateIntAttribute(stream IntAttributeCreationRequest) returns (stream IntAttributeCreationReply);
+}
+
+
+

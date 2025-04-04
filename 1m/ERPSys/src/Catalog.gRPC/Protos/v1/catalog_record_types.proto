@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "Catalog.gRPC.v1";
+
+package Catalog.v1;
+
+
+/*
+
+message Attribute
+{
+  string id =1;
+  string Name=2;
+  string Value =3;
+  string Type = 4;
+  string ValueType =5;
+}
+
+message IntAttributeCreationRequest{
+  string Name=2;
+  string Value =3;
+  string Type = 4;
+  string ValueType =5;
+}*/

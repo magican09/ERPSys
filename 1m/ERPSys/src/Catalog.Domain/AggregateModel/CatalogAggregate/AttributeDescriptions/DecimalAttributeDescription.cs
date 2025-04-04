@@ -1,6 +1,7 @@
 namespace Catalogs.Domain.AggregateModel.CatalogAggregate.AttributeDescriptions;
 
-public class DecimalAttributeDescription:AttributeDescription
+public class DecimalAttributeDescription:AttributeDescription<DecimalAttribute>
 {
-    public DecimalAttributeDescription():base(typeof(DecimalAttribute)) { }
+    public DecimalAttributeDescription(){ }
+    public DecimalAttributeDescription(IAttribute attribute):base(attribute) { }
 }
