@@ -1,0 +1,12 @@
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/bin/Debug/net9.0/EventBus.deps.json
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/bin/Debug/net9.0/EventBus.dll
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/bin/Debug/net9.0/EventBus.pdb
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.GeneratedMSBuildEditorConfig.editorconfig
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.AssemblyInfoInputs.cache
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.AssemblyInfo.cs
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.csproj.CoreCompileInputs.cache
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.sourcelink.json
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.dll
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/refint/EventBus.dll
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/EventBus.pdb
+/home/maga/RiderProjects/1m/ERPSys/src/EventBus/obj/Debug/net9.0/ref/EventBus.dll

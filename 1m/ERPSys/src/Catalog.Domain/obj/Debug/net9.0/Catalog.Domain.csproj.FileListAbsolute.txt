@@ -1,0 +1,13 @@
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/bin/Debug/net9.0/Catalog.Domain.deps.json
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/bin/Debug/net9.0/Catalog.Domain.dll
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/bin/Debug/net9.0/Catalog.Domain.pdb
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.csproj.AssemblyReference.cache
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.AssemblyInfoInputs.cache
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.AssemblyInfo.cs
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.csproj.CoreCompileInputs.cache
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.sourcelink.json
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.dll
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/refint/Catalog.Domain.dll
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/Catalog.Domain.pdb
+/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/obj/Debug/net9.0/ref/Catalog.Domain.dll

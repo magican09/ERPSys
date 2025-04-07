@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "+CtMkaH7lbUN25dPEuMfVo8TMKh1uDlKYCaFVmDN9fo=",
+  "Source": "Catalog.gRPC",
+  "BasePath": "_content/Catalog.gRPC",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
