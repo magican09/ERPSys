@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "E36pGj3ffpI=",
+  "success": true,
+  "projectFilePath": "/home/maga/RiderProjects/1m/ERPSys/src/Catalog.Domain/Catalog.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/maga/.nuget/packages/mediatr/12.4.1/mediatr.12.4.1.nupkg.sha512",
+    "/home/maga/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/home/maga/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

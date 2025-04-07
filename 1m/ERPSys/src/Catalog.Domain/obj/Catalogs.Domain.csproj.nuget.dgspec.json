@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/maga/RiderProjects/1m/ERPSys/src/Catalogs.Domain/Catalogs.Domain.csproj": {}
+  },
+  "projects": {
+    "/home/maga/RiderProjects/1m/ERPSys/src/Catalogs.Domain/Catalogs.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/maga/RiderProjects/1m/ERPSys/src/Catalogs.Domain/Catalogs.Domain.csproj",
+        "projectName": "Catalogs.Domain",
+        "projectPath": "/home/maga/RiderProjects/1m/ERPSys/src/Catalogs.Domain/Catalogs.Domain.csproj",
+        "packagesPath": "/home/maga/.nuget/packages/",
+        "outputPath": "/home/maga/RiderProjects/1m/ERPSys/src/Catalogs.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/maga/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/lib/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.104/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

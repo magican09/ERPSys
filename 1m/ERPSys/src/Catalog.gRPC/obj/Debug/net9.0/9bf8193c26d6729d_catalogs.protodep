@@ -1,0 +1,6 @@
+obj/Debug/net9.0/Protos/v1/Catalogs.cs \
+obj/Debug/net9.0/Protos/v1/CatalogsGrpc.cs: Protos/v1/types.proto\
+ /home/maga/.nuget/packages/grpc.tools/2.64.0/build/native/include/google/protobuf/any.proto\
+ Protos/v1/catalog_types.proto\
+ Protos/v1/catalog_record_types.proto\
+ Protos/v1/catalogs.proto

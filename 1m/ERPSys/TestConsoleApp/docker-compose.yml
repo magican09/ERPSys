@@ -1,0 +1,30 @@
+﻿#docker-compose.yml (Base)
+#services:
+ # consoleapp:
+  #  image: consoleapp
+   # build:
+    #  context: .
+     # dockerfile: ConsoleApp/Dockerfile
+   # depends_on:
+    #  - sqldata "Server=localhost;TrustServerCertificate=True;Database=dict_db;User=sa;Password=aA26497852)"
+ # sqldata:
+ #   environment:
+  #    - SA_PASSWORD=aA26497852)
+   #   - ACCEPT_EULA=Y
+    #image: mcr.microsoft.com/mssql/server
+    #ports:
+    #  - 1433:1433
+  services:
+    postgres:
+      container_name: postgres_container
+      image: postgres
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: aA26497852)
+        POSTGRES_DB: postgres_db
+        PGDATA: /var/lib/postgresql/data/pgdata
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data/pgdata
+      ports:
+        - "5432:5432"
+  
