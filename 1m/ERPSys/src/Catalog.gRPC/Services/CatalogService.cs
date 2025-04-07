@@ -24,9 +24,9 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
   {
     Guid requestId = Guid.Empty;
 
-    var type_str_full = typeof(IntAttribute).AssemblyQualifiedName;
+    /*var type_str_full = typeof(IntAttribute).AssemblyQualifiedName;
     
-    var tt = System.Type.GetType(type_str_full);
+    var tt = System.Type.GetType(type_str_full);*/
     
     if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
           requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
@@ -135,6 +135,7 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
           {
               var attributeDescription = new AttributeDescriptionAppModel
               {
+                  CatalogItemId = request.CataloItemId,
                   AttributeName = request.AttributeName,
                   Description = request.Description,
                   Synonym = request.Synonym,
@@ -178,5 +179,150 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
       }
    
      
+  }
+
+  public override async Task AddNewCatalogRecordItem(IAsyncStreamReader<AddNewCatalogRecordItemRequest> requestStream, IServerStreamWriter<AddNewCatalogRecordItemReply> responseStream,
+      ServerCallContext context)
+  {
+      Guid requestId = Guid.Empty;
+
+   
+      if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
+          requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
+
+      if (requestId == Guid.Empty)
+      {
+          services.Logger.LogWarning("Invalid integration event - RequestId is missing - {@IntegrationEvent}", requestStream);
+      }
+
+      using (services.Logger.BeginScope(
+                 new List<KeyValuePair<string, object>> { new("identifiedCommandId", requestId) }))
+      {
+          await foreach (var request in requestStream.ReadAllAsync())
+          {
+              var catalocRecorditem = new CatalogRecordItemAppModel
+              {
+                  CatalogItemId = request.CatalogItemId
+              };
+             
+              var addNewCatalogRecordItemCommand = new AddNewCatalogRecordItemCommand(catalocRecorditem);
+
+              var requestAddNewcatalogRecordItem =
+                  new IdentifiedCommand<AddNewCatalogRecordItemCommand,int>(addNewCatalogRecordItemCommand, requestId);
+              services.Logger.LogInformation(
+                  "Sending command:{CommandName}: {CommandId} ({@Command})",
+                  addNewCatalogRecordItemCommand.GetGenericTypeName(),
+                  requestAddNewcatalogRecordItem.Id,
+                  requestAddNewcatalogRecordItem);
+                 
+              var result = await services.Mediator.Send(requestAddNewcatalogRecordItem);
+              
+              if(result != default(int))
+              {
+                  services.Logger.LogInformation("CreateOrderCommand succeeded - RequestId: {RequestId}", requestId);
+              }
+              else
+              {
+                  services.Logger.LogWarning("CreateOrderCommand failed - RequestId: {RequestId}", requestId);
+              }
+
+              await responseStream.WriteAsync(
+              
+                  new AddNewCatalogRecordItemReply
+                  {
+                        CatalogItemRecordId  = result.ToString(),
+                  }
+              );
+          }
+      }
+  }
+
+  public override async Task AddCatalogRecordItem(IAsyncStreamReader<AddCatalogRecordItemRequest> requestStream, IServerStreamWriter<AddCatalogRecordItemReply> responseStream,
+      ServerCallContext context)
+  {
+      Guid requestId = Guid.Empty;
+
+
+    
+      if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
+          requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
+
+      if (requestId == Guid.Empty)
+      {
+          services.Logger.LogWarning("Invalid integration event - RequestId is missing - {@IntegrationEvent}", requestStream);
+      }
+
+      using (services.Logger.BeginScope(
+                 new List<KeyValuePair<string, object>> { new("identifiedCommandId", requestId) }))
+      {
+          await foreach (var request in requestStream.ReadAllAsync())
+          {
+              var catalorRecorditem = new CatalogRecordItemAppModel
+              {
+                  CatalogItemId = request.CatalogItemId,
+                  Attributes = request.Attributes.Select(
+                      a => new AttributeAppModel()
+                      {
+                          Name = a.Name,
+                          Type = a.Type,
+                          Value = a.Value
+                      }).ToList()
+              };
+              var addCatalogRecordItemCommand = new AddCatalogRecordItemCommand(catalorRecorditem);
+              
+              var requestAddCatalogRecordItem = new  IdentifiedCommand<AddCatalogRecordItemCommand,int>(addCatalogRecordItemCommand, requestId);
+            
+              services.Logger.LogInformation(
+                  "Sending command:{CommandName}: {CommandId} ({@Command})",
+                  addCatalogRecordItemCommand.GetGenericTypeName(),
+                  requestAddCatalogRecordItem.Id,
+                  requestAddCatalogRecordItem);
+            
+              var result = await services.Mediator.Send(requestAddCatalogRecordItem);
+              
+              if(result != default(int))
+              {
+                  services.Logger.LogInformation("CreateOrderCommand succeeded - RequestId: {RequestId}", requestId);
+              }
+              else
+              {
+                  services.Logger.LogWarning("CreateOrderCommand failed - RequestId: {RequestId}", requestId);
+              }
+
+              await responseStream.WriteAsync(new AddCatalogRecordItemReply
+              {
+                  CatalogItemRecordId = result.ToString(),
+              });
+
+          }
+      }
+  }
+
+  public override async Task GetCatalogItem(IAsyncStreamReader<GetCatalogItemRequest> requestStream, IServerStreamWriter<GetCatalogItemReply> responseStream, ServerCallContext context)
+  {
+      Guid requestId = Guid.Empty;
+      
+      if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
+          requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
+
+      if (requestId == Guid.Empty)
+      {
+          services.Logger.LogWarning("Invalid integration event - RequestId is missing - {@IntegrationEvent}", requestStream);
+      }
+
+      using (services.Logger.BeginScope(
+                 new List<KeyValuePair<string, object>> { new("identifiedCommandId", requestId) }))
+      {
+          await foreach (var request in requestStream.ReadAllAsync())
+          {
+
+              var catalogItem = await services.CatalogItemQueries.GetCatalogItemAsync(Int32.Parse(request.CatalogId));
+          
+              await responseStream.WriteAsync(new GetCatalogItemReply
+              {
+                  
+              });
+          }
+      }
   }
 }

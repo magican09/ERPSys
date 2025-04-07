@@ -14,7 +14,9 @@ service CatalogService
 {
   rpc CreateCatalod(stream CatalogCreationRequest) returns (stream CatalogCreationReqply);
   rpc AddAttribute(stream AddingAttributeRequest) returns (stream AddingAttributeReply);
-  //rpc CreateIntAttribute(stream IntAttributeCreationRequest) returns (stream IntAttributeCreationReply);
+  rpc AddNewCatalogRecordItem(stream AddNewCatalogRecordItemRequest) returns (stream AddNewCatalogRecordItemReply);
+  rpc AddCatalogRecordItem(stream AddCatalogRecordItemRequest) returns (stream AddCatalogRecordItemReply);
+  rpc GetCatalogItem(stream GetCatalogItemRequest) returns (stream GetCatalogItemReply); 
 }
 
 

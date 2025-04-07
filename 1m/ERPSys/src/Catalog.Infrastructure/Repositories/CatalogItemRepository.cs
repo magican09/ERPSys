@@ -22,7 +22,7 @@ public class CatalogItemRepository:ICatalogRepository
 
     public async Task<CatalogItem> GetAsync(int catalogItemId)
     {
-        var catalogItem =await _context.Catalogs.FindAsync(catalogItemId);
+        var catalogItem = await _context.Catalogs.FindAsync(catalogItemId);
         /*if (catalogItemId != null) это судя по всему не нужно, потому что свойства аттрибутов у нсс OwenMany для каталога
         {
             await _context.Entry(catalogItem)

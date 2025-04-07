@@ -35,6 +35,7 @@ public class CreateCatalogCommand:IRequest<int>
                 .Select(ad=> new AttributeDescriptionDTO
                 {
                     Id = ad.Id,
+                    CatalogItemId = ad.CatalogItemId,
                     AttributeName = ad.AttributeName,
                     Description = ad.Description,
                     Synonym = ad.Synonym,
@@ -76,6 +77,7 @@ public record CatalogItemDTO
 public record AttributeDescriptionDTO
 {
     public string Id { get; init; }
+    public string CatalogItemId { get; init; }
     public string AttributeTypeName { get; init; }
     public string AttributeName { get; init; }
     public string Description { get; init; }

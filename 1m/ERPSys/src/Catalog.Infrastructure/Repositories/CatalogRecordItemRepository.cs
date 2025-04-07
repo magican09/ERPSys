@@ -12,6 +12,11 @@ public class CatalogRecordItemRepository:ICatalogRecordItemRepository
     }
 
 
+    public CatalogRecordItem Add(CatalogRecordItem catalogRecordItem)
+    {
+        return _context.Add(catalogRecordItem).Entity;
+    }
+
     public async Task<IEnumerable<CatalogRecordItem>> GetAllAsync()
     {
         return await _context.CatalogRecordItems.ToListAsync();
