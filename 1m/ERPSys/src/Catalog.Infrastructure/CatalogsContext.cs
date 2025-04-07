@@ -35,7 +35,7 @@ public class CatalogsContext:DbContext,IUnitOfWork
     {
         try
         {
-           Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         catch (Exception e)
@@ -51,11 +51,13 @@ public class CatalogsContext:DbContext,IUnitOfWork
    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      //  modelBuilder.HasDefaultSchema("cataloging");
         modelBuilder.ApplyConfiguration(new ClientRequestEntityTypeConfiguration());
 
         modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CatalogRecordItemEntityTypeConfiguration());
-      
+        //modelBuilder.UseIntegrationEventLogs();
+
     }
 
     public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
@@ -118,7 +120,10 @@ public class CatalogsContext:DbContext,IUnitOfWork
             }
         }
     }
-    
-    
+
+    public override void Dispose()
+    {
+        base.Dispose();
+    }
 }
 #nullable enable

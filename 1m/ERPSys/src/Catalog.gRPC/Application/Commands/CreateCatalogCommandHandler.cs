@@ -66,7 +66,7 @@ public class CreateCatalogCommandHandler:IRequestHandler<CreateCatalogCommand,in
             );
         foreach (var dtoAtrDescription in message.CatalogItemDTO.AttributeDescriptions)
         {
-            var attrDescription = AttributeDescripionFactory.GetAttributeDescription(dtoAtrDescription.AttributeTypeName);
+            var attrDescription = AttributeDescripionFactory.CreateAttributeDescription(dtoAtrDescription.AttributeTypeName);
             attrDescription.AttributeName = dtoAtrDescription.AttributeName;
             attrDescription.Description = dtoAtrDescription.Description;
             attrDescription.Synonym=   dtoAtrDescription.Synonym;

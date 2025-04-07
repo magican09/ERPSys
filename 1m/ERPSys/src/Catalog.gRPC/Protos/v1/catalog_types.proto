@@ -69,17 +69,27 @@ message  CatalogCreationReqply{
 }
 
 message AddingAttributeRequest{
- 
-  string AttributeType =1;
-  string AttributeName=2;
-  string  Description =3;
-  string Synonym =4;
-  map<string,string> Properties =5;
+  string CataloItemId = 1;
+  string AttributeType =2;
+  string AttributeName=3;
+  string  Description =4;
+  string Synonym =5;
+  map<string,string> Properties =6;
 }
 
+message NameValuePair{
+  
+}
 message AddingAttributeReply{
 
   string id =1;
   string CatalogItemId=2;
 
+}
+
+message GetCatalogItemRequest{
+  string CatalogId=1;
+}
+message GetCatalogItemReply{
+  Catalog Item= 1;
 }

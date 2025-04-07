@@ -1,24 +1,34 @@
 syntax = "proto3";
 
 option csharp_namespace = "Catalog.gRPC.v1";
-
+import "Protos/v1/catalog_types.proto";
 package Catalog.v1;
-
-
-/*
 
 message Attribute
 {
-  string id =1;
-  string Name=2;
-  string Value =3;
-  string Type = 4;
-  string ValueType =5;
+  string Id =1;
+  string Name = 2;
+  string Type =3;
+  string Value =4;
 }
 
-message IntAttributeCreationRequest{
-  string Name=2;
-  string Value =3;
-  string Type = 4;
-  string ValueType =5;
-}*/
+
+message AddNewCatalogRecordItemRequest {
+  string CatalogItemId =1;
+  
+}
+
+message AddNewCatalogRecordItemReply {
+  string CatalogItemRecordId =1;
+}
+
+
+
+message AddCatalogRecordItemRequest {
+  string CatalogItemId =1;
+  repeated Attribute Attributes =2; 
+}
+message AddCatalogRecordItemReply {
+  string CatalogItemRecordId =1;
+}
+

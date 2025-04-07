@@ -26,9 +26,7 @@ public class CatalogRecordItemEntityTypeConfiguration: IEntityTypeConfiguration<
                     .UseHiLo("catalog_record_int_attribute_seq");
                
                 p.Property(o => o.DescriptionType)
-                    .HasConversion(
-                        v=>v.ToString(),
-                        v=>(Type) Enum.Parse(typeof(Type), v));
+                    .HasConversion<StringToTypeConverter>();
 
               
             }

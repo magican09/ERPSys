@@ -3,7 +3,10 @@
 
 using System.Collections;
 using System.Reflection;
+using System.Text.Json;
+using Catalogs.Domain.AggregateModel.CatalogAggregate;
 using Catalogs.Domain.Events;
+using Catalogs.Domain.Exceptions;
 
 namespace Catalogs.Domain.AggregateModel.CatalogRecordItemAggregate;
 
@@ -29,6 +32,15 @@ public class CatalogRecordItem:Entity,IAggregateRoot
         _catalogRecordItemAttributes = new List<CatalogRecordItemAttribute>();
     }
 
+    public CatalogRecordItem(CatalogItem catalog):this()
+    {
+        CatalogItemId = catalog.Id;
+        foreach (var attributeDescription in catalog.IntAttributeDescriptions)
+        {
+            var newAttribute =  new IntAttribute(attributeDescription.AttributeName);
+            this.AddAttribute(newAttribute);
+        }
+    }
     public void AddAttribute(IAttribute attribute)
     {
         var attributesField = GetAttributesFieldByType(attribute.Type);
@@ -59,12 +71,42 @@ public class CatalogRecordItem:Entity,IAggregateRoot
 
         if (existingAttribute == null)
             throw new Exception($"Attribute {attribute.Name} not found");
-        
        
         (attributesField as IList).Remove(attribute);
         
         this.AddDomainEvent(new AttributeAddedEvent(existingAttribute));
     }
+
+
+    public void SetAttributeValue(string attributeName, string attributeTypeName, string attributeValue)
+    {  
+        var assemlyTypes = Assembly.GetAssembly(typeof(IAttribute)).ExportedTypes.ToList(); // this.GetType().Assembly.ExportedTypes.ToList();
+
+        var atributeClassFullName =  assemlyTypes
+            .FirstOrDefault(t => t.Name == attributeTypeName).AssemblyQualifiedName;
+      
+        if(atributeClassFullName == null)
+            throw new CatalogDomainException($"Attribute with name {atributeClassFullName} not supported.");
+        
+        var attributeType = System.Type.GetType(atributeClassFullName);
+     
+        if(attributeType == null)
+            throw new CatalogDomainException($"Attribute  type {atributeClassFullName}  don't created.");
+        
+        var attributesField = GetAttributesFieldByType(attributeType);
+        
+        var attribute = (IAttribute)attributesField.FirstOrDefault(a => a.Name == attributeName);
+        
+        if(attribute == null)
+            throw new CatalogDomainException($"New attribute  object {atributeClassFullName} not created.");
+
+        var attributevalue = Convert.ChangeType(attributeValue, attribute.ValueType);
+      
+        
+        attribute.SetValue(attributevalue);
+        
+    }
+     
     private IEnumerable<IAttribute> GetAttributesFieldByType(Type attributreType)
     {
         var f = this.GetType().GetFields(BindingFlags.NonPublic |

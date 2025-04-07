@@ -3,6 +3,7 @@ namespace Catalog.gRPC.Application.Models;
 public class AttributeDescriptionAppModel
 {
     public string Id { get; init; }
+    public string CatalogItemId { get; init; }
     public string AttributeTypeName { get; init; }
     public string AttributeName { get; init; }
     public string Description { get; init; }

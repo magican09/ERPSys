@@ -11,11 +11,12 @@ public class AddAttributeDescriptionCommand:IRequest<(int,int)>
     {
         AttributeDescription = new   AttributeDescriptionDTO
             {
+                CatalogItemId = attributeDescription.CatalogItemId,
                 AttributeName = attributeDescription.AttributeName,
                 Description = attributeDescription.Description,
                 Synonym = attributeDescription.Synonym,
                 AttributeTypeName = attributeDescription.AttributeTypeName,
-                Properties = AttributeDescription.Properties
+                Properties = attributeDescription.Properties
                     .Select(p=> 
                         new KeyValuePair<string,string>(p.Key,p.Value))
                     .ToDictionary(k=>k.Key,v=>v.Value)

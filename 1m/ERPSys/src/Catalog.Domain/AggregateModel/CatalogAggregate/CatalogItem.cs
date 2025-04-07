@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Reflection;
+using Catalogs.Domain.AggregateModel.CatalogRecordItemAggregate;
 using Catalogs.Domain.AggregateModel.Common;
 using Catalogs.Domain.Events.AttributeDescriptionEvents;
 using Catalogs.Domain.Exceptions;
@@ -101,20 +102,6 @@ public class CatalogItem:Entity,IAggregateRoot
         
     }
     
-    public void AddAttribute(string attributeClassName, string attributeName)
-    {
-        IAttribute newAttribute;
-
-        switch (attributeClassName)
-        {
-            case nameof(IntAttribute): newAttribute = new IntAttribute(attributeName); break;
-        //    case nameof(StringAttribute): newAttribute = new StringAttribute(attributeName);break;
-            default: 
-                break;
-        }
-
-    }
-
     public void AddAttribute(IAttributeDescription attributeDescription)
     { 
         var descriptionsField = GetAttributeDescriptionsFieldByType(attributeDescription.Type);
@@ -129,6 +116,8 @@ public class CatalogItem:Entity,IAggregateRoot
             throw new CatalogDomainException($"Attribute with name {attributeDescription.AttributeType} already exists.");
       
         (descriptionsField as IList).Add(attributeDescription);
+        
+       // attributeDescription.CatalogItemId = this.Id;
         
         this.AddDomainEvent(new AttributeDescriptionAddedEvent(attributeDescription));
     }
@@ -166,14 +155,36 @@ public class CatalogItem:Entity,IAggregateRoot
        
     }
 
+    public IEnumerable<IEnumerable<ValueTuple<Type,IAttributeDescription>>> GetAllAttributeDescriptionsFields()
+    {  
+        var AllProps = new List<List<ValueTuple<Type,IAttributeDescription>>>(); 
 
+        var attrDescriptionFields = this.GetType().GetFields(BindingFlags.NonPublic |
+                                                             BindingFlags.Instance |
+                                                             BindingFlags.Static)
+            .Where(x =>
+                x.FieldType.Name == "List`1" &&
+                x.FieldType.GetGenericArguments()[0].GetInterface("IAttributeDescription") != null);
+            //.Select(p=>AllProps.Add(p.GetValue(this) as List<IAttributeDescription>));
     
-     
+        foreach (var fieldInfo in attrDescriptionFields)
+        {
+            var type = fieldInfo.FieldType.GetGenericArguments()[0];
+            var props = (fieldInfo.GetValue(this) as List<IAttributeDescription>)
+                .Select(a=> new  {a.Type,a});
+             
+           // AllProps.Add(props);
+           }    
+        return AllProps;
+    }
+    
     private IEnumerable<IAttributeDescription> GetAttributeDescriptionsFieldByType(Type descriptionType)
     {
+        /*
         var f = this.GetType().GetFields(BindingFlags.NonPublic |
                                          BindingFlags.Instance |
                                          BindingFlags.Static);
+                                         */
         
         var attrDescriptionField = this.GetType().GetFields(BindingFlags.NonPublic |
                                                             BindingFlags.Instance |

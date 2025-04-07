@@ -5,7 +5,7 @@ namespace Catalogs.Domain.AggregateModel.CatalogAggregate.AttributeDescriptions;
 
 public static class AttributeDescripionFactory
 {
-    public static IAttributeDescription  GetAttributeDescription(string atributeClassName)
+    public static IAttributeDescription  CreateAttributeDescription(string atributeClassName)
     {
         var assemlyTypes = Assembly.GetAssembly(typeof(AttributeDescripionFactory)).ExportedTypes.ToList(); // this.GetType().Assembly.ExportedTypes.ToList();
 
