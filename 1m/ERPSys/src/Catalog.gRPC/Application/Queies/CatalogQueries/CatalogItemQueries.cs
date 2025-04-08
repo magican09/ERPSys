@@ -1,5 +1,6 @@
 using Catalog.Infrastructure;
 using Catalogs.Domain.AggregateModel.CatalogAggregate;
+using Catalogs.Domain.AggregateModel.CatalogAggregate.AttributeDescriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.gRPC.Application.Queies;
@@ -14,8 +15,13 @@ public class CatalogItemQueries(CatalogsContext context) :ICatalogItemQueries
     
         if (catalog is null)
             throw new KeyNotFoundException();
-   
-        var allAttributeDescrtiptions = catalog.GetAllAttributeDescriptionsFields();
+        List<IAttributeDescription> allAttributeDescrtiptions = new List<IAttributeDescription>();
+
+        foreach (var discriptions in catalog.AttributeDescriptionsMap.Select(x => x.Value))
+        {
+           foreach (var attributeDescription in discriptions)
+               allAttributeDescrtiptions.Add(attributeDescription);
+        }
         
         return new CatalogItemViewModel
         {   Id = catalog.Id.ToString(),
@@ -38,15 +44,15 @@ public class CatalogItemQueries(CatalogsContext context) :ICatalogItemQueries
             DataLockControlMode = catalog.DataLockControlMode,
             FullTextSearch = catalog.FullTextSearch,
             CreateOnInput = catalog.CreateOnInput,
-            AttributeDescriptions= catalog.GetAllAttributeDescriptionsFields()
+            /*AttributeDescriptions= catalog.GetAllAttributeDescriptionsFields()
                 .Select(adf =>
                     new AttributeDescriptionViewModel
                     {
-                        Type = adf.Item1.ToString(),
+                        //Type = adf.Item1.ToString(),
                         
                     }
                
-            ).ToList()
+            ).ToList()*/
         };
     }
 }

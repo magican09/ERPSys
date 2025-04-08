@@ -35,7 +35,7 @@ public class CatalogsContext:DbContext,IUnitOfWork
     {
         try
         {
-            //Database.EnsureDeleted();
+         //   Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         catch (Exception e)
@@ -53,7 +53,6 @@ public class CatalogsContext:DbContext,IUnitOfWork
     {
       //  modelBuilder.HasDefaultSchema("cataloging");
         modelBuilder.ApplyConfiguration(new ClientRequestEntityTypeConfiguration());
-
         modelBuilder.ApplyConfiguration(new CatalogItemEntityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CatalogRecordItemEntityTypeConfiguration());
         //modelBuilder.UseIntegrationEventLogs();

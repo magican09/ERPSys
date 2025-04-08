@@ -68,7 +68,7 @@ message  CatalogCreationReqply{
   string  Name =2;
 }
 
-message AddingAttributeRequest{
+message AddingAttributeDescriptionRequest{
   string CataloItemId = 1;
   string AttributeType =2;
   string AttributeName=3;
@@ -80,7 +80,7 @@ message AddingAttributeRequest{
 message NameValuePair{
   
 }
-message AddingAttributeReply{
+message AddingAttributeDescriptionReply{
 
   string id =1;
   string CatalogItemId=2;

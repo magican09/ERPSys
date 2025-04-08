@@ -1,5 +1,8 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Catalog.gRPC.Extentions;
 using Catalog.gRPC.Services;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddApplictionaServices();
@@ -8,6 +11,15 @@ builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
 
 var app = builder.Build();
+/*app.UseExceptionHandler( a=>a.Run(async context =>
+{
+    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+    var exception = exceptionHandlerPathFeature.Error;
+    
+    var result = JsonSerializer.Serialize(new { error = exception.Message });
+    context.Response.ContentType = "application/json";
+    await context.Response.WriteAsync(result);
+}));*/
 
 app.MapGrpcReflectionService();
 

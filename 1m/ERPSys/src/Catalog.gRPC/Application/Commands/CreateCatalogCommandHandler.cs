@@ -16,7 +16,6 @@ public class CreateCatalogCommandHandler:IRequestHandler<CreateCatalogCommand,in
     private readonly ILogger<CreateCatalogCommandHandler> _logger;
 
     public CreateCatalogCommandHandler (IMediator mediator,
-//        IOrderingIntegrationEventService orderingIntegrationEventService,
         ICatalogRepository catalogRepository,
         IIdentityService identityService,
      ILogger<CreateCatalogCommandHandler> logger)
@@ -30,13 +29,15 @@ public class CreateCatalogCommandHandler:IRequestHandler<CreateCatalogCommand,in
 
     public async Task<int> Handle(CreateCatalogCommand message, CancellationToken cancellationToken)
     {
-      
+
+         
+       
        
         var existingCatalog = await _catalogRepository.GetByNameAsync(message.CatalogItemDTO.Name);
 
         if (existingCatalog != null)
         {
-            _logger.LogWarning($"Catalog with name : {message.CatalogItemDTO.Name} already exists");      
+            _logger.LogError($"Catalog with name : {message.CatalogItemDTO.Name} already exists");      
             throw new ApplicationException($"Catalog with name : {message.CatalogItemDTO.Name} already exists");
         }
         
@@ -66,19 +67,37 @@ public class CreateCatalogCommandHandler:IRequestHandler<CreateCatalogCommand,in
             );
         foreach (var dtoAtrDescription in message.CatalogItemDTO.AttributeDescriptions)
         {
+          
             var attrDescription = AttributeDescripionFactory.CreateAttributeDescription(dtoAtrDescription.AttributeTypeName);
             attrDescription.AttributeName = dtoAtrDescription.AttributeName;
             attrDescription.Description = dtoAtrDescription.Description;
             attrDescription.Synonym=   dtoAtrDescription.Synonym;
-            AttributeDescriptionHelper.SetAttributeDescriptionProperties(attrDescription,dtoAtrDescription.Properties);
-            catalog.AddAttribute(attrDescription);
+            try
+            {  CatalogItem.SetAttributeDescriptionProperties(
+                    attrDescription,
+                    dtoAtrDescription.Properties
+                         .Select(p_kvp => 
+                             new KeyValuePair<string, object>(p_kvp.Key,p_kvp.Value))
+                         .ToDictionary()
+                            
+                 );
+
+              catalog.AddAttributeDescription(attrDescription);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error while adding attribute description {attrDescription.AttributeName}");
+            }
         }
         
         _catalogRepository.Add(catalog);
        
+        
         catalog.AddDomainEvent(new CatalogItemCreatedEvent(catalog));
         
         await _catalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+        
+        
         
         return  catalog.Id;
     }

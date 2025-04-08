@@ -50,9 +50,9 @@ namespace Catalog.gRPC.v1 {
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Catalog.gRPC.v1.CatalogCreationReqply> __Marshaller_Catalog_v1_CatalogCreationReqply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.CatalogCreationReqply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Catalog.gRPC.v1.AddingAttributeRequest> __Marshaller_Catalog_v1_AddingAttributeRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.AddingAttributeRequest.Parser));
+    static readonly grpc::Marshaller<global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest> __Marshaller_Catalog_v1_AddingAttributeDescriptionRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Marshaller<global::Catalog.gRPC.v1.AddingAttributeReply> __Marshaller_Catalog_v1_AddingAttributeReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.AddingAttributeReply.Parser));
+    static readonly grpc::Marshaller<global::Catalog.gRPC.v1.AddingAttributeDescriptionReply> __Marshaller_Catalog_v1_AddingAttributeDescriptionReply = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.AddingAttributeDescriptionReply.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Catalog.gRPC.v1.AddNewCatalogRecordItemRequest> __Marshaller_Catalog_v1_AddNewCatalogRecordItemRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Catalog.gRPC.v1.AddNewCatalogRecordItemRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
@@ -75,12 +75,12 @@ namespace Catalog.gRPC.v1 {
         __Marshaller_Catalog_v1_CatalogCreationReqply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-    static readonly grpc::Method<global::Catalog.gRPC.v1.AddingAttributeRequest, global::Catalog.gRPC.v1.AddingAttributeReply> __Method_AddAttribute = new grpc::Method<global::Catalog.gRPC.v1.AddingAttributeRequest, global::Catalog.gRPC.v1.AddingAttributeReply>(
+    static readonly grpc::Method<global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest, global::Catalog.gRPC.v1.AddingAttributeDescriptionReply> __Method_AddAttribute = new grpc::Method<global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest, global::Catalog.gRPC.v1.AddingAttributeDescriptionReply>(
         grpc::MethodType.DuplexStreaming,
         __ServiceName,
         "AddAttribute",
-        __Marshaller_Catalog_v1_AddingAttributeRequest,
-        __Marshaller_Catalog_v1_AddingAttributeReply);
+        __Marshaller_Catalog_v1_AddingAttributeDescriptionRequest,
+        __Marshaller_Catalog_v1_AddingAttributeDescriptionReply);
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Catalog.gRPC.v1.AddNewCatalogRecordItemRequest, global::Catalog.gRPC.v1.AddNewCatalogRecordItemReply> __Method_AddNewCatalogRecordItem = new grpc::Method<global::Catalog.gRPC.v1.AddNewCatalogRecordItemRequest, global::Catalog.gRPC.v1.AddNewCatalogRecordItemReply>(
@@ -123,7 +123,7 @@ namespace Catalog.gRPC.v1 {
       }
 
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
-      public virtual global::System.Threading.Tasks.Task AddAttribute(grpc::IAsyncStreamReader<global::Catalog.gRPC.v1.AddingAttributeRequest> requestStream, grpc::IServerStreamWriter<global::Catalog.gRPC.v1.AddingAttributeReply> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task AddAttribute(grpc::IAsyncStreamReader<global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest> requestStream, grpc::IServerStreamWriter<global::Catalog.gRPC.v1.AddingAttributeDescriptionReply> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -169,7 +169,7 @@ namespace Catalog.gRPC.v1 {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CatalogServiceBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_CreateCatalod, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.CatalogCreationRequest, global::Catalog.gRPC.v1.CatalogCreationReqply>(serviceImpl.CreateCatalod));
-      serviceBinder.AddMethod(__Method_AddAttribute, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.AddingAttributeRequest, global::Catalog.gRPC.v1.AddingAttributeReply>(serviceImpl.AddAttribute));
+      serviceBinder.AddMethod(__Method_AddAttribute, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest, global::Catalog.gRPC.v1.AddingAttributeDescriptionReply>(serviceImpl.AddAttribute));
       serviceBinder.AddMethod(__Method_AddNewCatalogRecordItem, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.AddNewCatalogRecordItemRequest, global::Catalog.gRPC.v1.AddNewCatalogRecordItemReply>(serviceImpl.AddNewCatalogRecordItem));
       serviceBinder.AddMethod(__Method_AddCatalogRecordItem, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.AddCatalogRecordItemRequest, global::Catalog.gRPC.v1.AddCatalogRecordItemReply>(serviceImpl.AddCatalogRecordItem));
       serviceBinder.AddMethod(__Method_GetCatalogItem, serviceImpl == null ? null : new grpc::DuplexStreamingServerMethod<global::Catalog.gRPC.v1.GetCatalogItemRequest, global::Catalog.gRPC.v1.GetCatalogItemReply>(serviceImpl.GetCatalogItem));

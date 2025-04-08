@@ -19,107 +19,136 @@ public class CatalogRecordItem:Entity,IAggregateRoot
     private List<DecimalAttribute> _decimalAttributes;
     private List<CatalogRecordItemAttribute> _catalogRecordItemAttributes;
     public IReadOnlyCollection<IntAttribute> IntAttributes => _intAttributes.AsReadOnly();
-    /*
+    
     public IReadOnlyCollection<StringAttribute> StringAttributes => _stringAttributes.AsReadOnly();
     public IReadOnlyCollection<DecimalAttribute> DecimalAttributes => _decimalAttributes.AsReadOnly();
     public IReadOnlyCollection<CatalogRecordItemAttribute> CatalogRecordItemAttributes => _catalogRecordItemAttributes.AsReadOnly();
-   */
-   public CatalogRecordItem()
+   
+    public  Dictionary<Type, IEnumerable<IAttribute>> AttributesMap { get; init; } = new Dictionary<Type, IEnumerable<IAttribute>>();
+    
+    public CatalogRecordItem()
     {
         _intAttributes = new List<IntAttribute>();
         _decimalAttributes = new List<DecimalAttribute>();
         _stringAttributes = new List<StringAttribute>();
         _catalogRecordItemAttributes = new List<CatalogRecordItemAttribute>();
+      
+        AttributesMap.Add(typeof(IntAttribute),_intAttributes);
+        AttributesMap.Add(typeof(DecimalAttribute),_decimalAttributes );
+        AttributesMap.Add(typeof(StringAttribute),_stringAttributes );
+        AttributesMap.Add(typeof(CatalogRecordItemAttribute),_catalogRecordItemAttributes );
+
+        
     }
 
     public CatalogRecordItem(CatalogItem catalog):this()
     {
         CatalogItemId = catalog.Id;
-        foreach (var attributeDescription in catalog.IntAttributeDescriptions)
+        
+        /*foreach (var attributeDescription in catalog.IntAttributeDescriptions)
         {
             var newAttribute =  new IntAttribute(attributeDescription.AttributeName);
-            this.AddAttribute(newAttribute);
-        }
-    }
-    public void AddAttribute(IAttribute attribute)
-    {
-        var attributesField = GetAttributesFieldByType(attribute.Type);
-        
-        if(attributesField == null)
-            throw new Exception($"Attribute type {attribute.Type.Name} is not supported");
-       
-        var existingAttribute = attributesField.FirstOrDefault(a=>a.Name == attribute.Name);
-
-        if (existingAttribute != null)
-            throw new Exception($"Attribute {attribute.Name} already exists");
-        
-        var newAtribute = (IAttribute)Activator.CreateInstance(attribute.Type, new object[] { attribute.Name});
-
-        (attributesField as IList).Add(newAtribute);
-        
-        this.AddDomainEvent(new AttributeAddedEvent(newAtribute));
+            this.CreateAttribute(newAttribute);
+        }*/
     }
  
-    public void DeleteAttribute(IAttribute attribute)
+
+    public void DeleteAttribute(Type attributeType, string attributeName)
     {
-        var attributesField = GetAttributesFieldByType(attribute.Type);
-        
-        if(attributesField == null)
-            throw new Exception($"Attribute type {attribute.Type.Name} is not supported");
-       
-        var existingAttribute = attributesField.FirstOrDefault(a=>a.Name == attribute.Name);
+        var attribute = AttributesMap[attributeType].FirstOrDefault(a=>a.Name == attributeName);
 
-        if (existingAttribute == null)
-            throw new Exception($"Attribute {attribute.Name} not found");
-       
-        (attributesField as IList).Remove(attribute);
+        if (attribute == null)
+            throw new CatalogDomainException(
+                $"Attribute by type {attributeType.FullName}  or name {attributeName} is not found");
         
-        this.AddDomainEvent(new AttributeAddedEvent(existingAttribute));
+        var attributes = AttributesMap[attributeType];
+        
+        (attributes as IList).Remove(attributes);
+        
+        this.AddDomainEvent(new AttributeDeletedEvent(attribute));
     }
 
-
-    public void SetAttributeValue(string attributeName, string attributeTypeName, string attributeValue)
-    {  
-        var assemlyTypes = Assembly.GetAssembly(typeof(IAttribute)).ExportedTypes.ToList(); // this.GetType().Assembly.ExportedTypes.ToList();
-
-        var atributeClassFullName =  assemlyTypes
-            .FirstOrDefault(t => t.Name == attributeTypeName).AssemblyQualifiedName;
-      
-        if(atributeClassFullName == null)
-            throw new CatalogDomainException($"Attribute with name {atributeClassFullName} not supported.");
-        
-        var attributeType = System.Type.GetType(atributeClassFullName);
-     
-        if(attributeType == null)
-            throw new CatalogDomainException($"Attribute  type {atributeClassFullName}  don't created.");
-        
-        var attributesField = GetAttributesFieldByType(attributeType);
-        
-        var attribute = (IAttribute)attributesField.FirstOrDefault(a => a.Name == attributeName);
-        
-        if(attribute == null)
-            throw new CatalogDomainException($"New attribute  object {atributeClassFullName} not created.");
-
-        var attributevalue = Convert.ChangeType(attributeValue, attribute.ValueType);
-      
-        
-        attribute.SetValue(attributevalue);
-        
-    }
-     
-    private IEnumerable<IAttribute> GetAttributesFieldByType(Type attributreType)
+    public void DeleteAttribute(string attributeTypeClassName, string attributeName)
     {
-        var f = this.GetType().GetFields(BindingFlags.NonPublic |
-                                         BindingFlags.Instance |
-                                         BindingFlags.Static);
+        var attributeType = DomainHelpers.GetTypeByClassName(attributeTypeClassName);
         
-        var attrsField = this.GetType().GetFields(BindingFlags.NonPublic |
-                                                            BindingFlags.Instance |
-                                                            BindingFlags.Static)
-            .FirstOrDefault(x =>
-                x.FieldType.Name == "List`1" && x.FieldType.GetGenericArguments()[0] == attributreType)
-            ?.GetValue(this);
-       
-        return attrsField  as IEnumerable<IAttribute>; 
+        this.DeleteAttribute(attributeType, attributeName);
     }
+    
+    public void UpdateAttribute(Type attributeType, string attributeName, object attributeValue)
+    {
+        var attributeValueType = attributeType.GenericTypeArguments.First();
+      
+        object attrbNewValue;
+        
+        try
+        {
+            attrbNewValue = Convert.ChangeType(attributeValue, attributeValueType);
+        }
+        finally
+        {
+            attrbNewValue = attributeValue;
+        }
+        
+         
+        
+        var attribute = AttributesMap[attributeType].FirstOrDefault(a=>a.Name == attributeName);
+      
+        if (attribute == null)
+            throw new CatalogDomainException(
+                $"Attribute by type {attributeType.FullName}  or name {attributeName} is not found");
+
+        attribute.SetValue(attrbNewValue);
+    }
+    public void UpdateAttribute(string attributeTypeClasssName, string attributeName, object attributeValue)
+    {
+        var attributeType = DomainHelpers.GetTypeByClassName(attributeTypeClasssName);
+        
+        this.UpdateAttribute(attributeType, attributeName, attributeValue);
+    }
+    
+    public IAttribute ReadAttribute(Type attributeType, string attributeName)
+    {
+        var attribute = AttributesMap[attributeType].FirstOrDefault(a=>a.Name == attributeName);
+       
+        if (attribute == null)
+            throw new CatalogDomainException(
+                $"Attribute by type {attributeType.FullName}  or name {attributeName}is not found");
+
+        return attribute;
+    }
+
+    public IAttribute ReadAttribute(string attributeClassName, string attributeName)
+    {
+        var attributeType = DomainHelpers.GetTypeByClassName(attributeClassName);
+        
+        return ReadAttribute(attributeType, attributeName);
+    }
+    
+    
+    public void CreateAttribute(Type attributeType, string attributeName, object attributeValue)
+    {
+        var attrValue = Convert.ChangeType(attributeValue, attributeType);
+        
+        var newAttribute = (IAttribute) Activator.CreateInstance(attributeType, new object[] { attributeName,attrValue});
+     
+        if (newAttribute == null)
+            throw new CatalogDomainException(
+                $"Attribute by type {attributeType.FullName} not supported");
+
+        var attributes = AttributesMap.FirstOrDefault(a=>a.Key == attributeType).Value; 
+       
+        (attributes as IList).Add(newAttribute);
+        
+        this.AddDomainEvent(new AttributeAddedEvent(newAttribute));
+    }
+
+    public void CreateAttribute(string attributeClassName, string attributeName, object attributeValue)
+    {
+        var classType = DomainHelpers.GetTypeByClassName(attributeClassName);
+        
+        this.CreateAttribute(classType, attributeName, attributeValue);
+        
+    }
+
 }
