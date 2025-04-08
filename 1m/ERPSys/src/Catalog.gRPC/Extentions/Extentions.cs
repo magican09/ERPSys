@@ -54,6 +54,7 @@ internal static class Extensions
          //   cfg.AddOpenBehavior(typeof(ValidatorBehavior<,>));
           //  cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
         });
+         
           services.AddScoped<ICatalogServices, CatalogServices>();
             
           services.AddScoped<ICatalogItemQueries, CatalogItemQueries>();

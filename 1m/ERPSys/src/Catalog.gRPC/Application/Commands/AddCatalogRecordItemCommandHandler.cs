@@ -36,7 +36,7 @@ public class AddCatalogRecordItemCommandHandler:IRequestHandler<AddCatalogRecord
 
         foreach (var attributeDto in addedCatalorRecordItemDTO.Attributes)
         {
-             newCatalogRecorditem.SetAttributeValue(attributeDto.Name,attributeDto.Type, attributeDto.Value);
+             newCatalogRecorditem.UpdateAttribute(attributeDto.Name,attributeDto.Type, attributeDto.Value);
         }
         
         _catalogRecordItemRepository.Add(newCatalogRecorditem);

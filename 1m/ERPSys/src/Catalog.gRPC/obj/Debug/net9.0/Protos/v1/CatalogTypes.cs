@@ -55,17 +55,18 @@ namespace Catalog.gRPC.v1 {
             "ASgJEhIKCkNob2ljZU1vZGUYEyABKAkSPwoVQXR0cmlidXRlRGVzY3JpcHRp",
             "b25zGBQgAygLMiAuQ2F0YWxvZy52MS5BdHRyaWJ1dGVEZXNjcmlwdGlvbiIx",
             "ChVDYXRhbG9nQ3JlYXRpb25SZXFwbHkSCgoCSWQYASABKAkSDAoETmFtZRgC",
-            "IAEoCSL9AQoWQWRkaW5nQXR0cmlidXRlUmVxdWVzdBIUCgxDYXRhbG9JdGVt",
-            "SWQYASABKAkSFQoNQXR0cmlidXRlVHlwZRgCIAEoCRIVCg1BdHRyaWJ1dGVO",
-            "YW1lGAMgASgJEhMKC0Rlc2NyaXB0aW9uGAQgASgJEg8KB1N5bm9ueW0YBSAB",
-            "KAkSRgoKUHJvcGVydGllcxgGIAMoCzIyLkNhdGFsb2cudjEuQWRkaW5nQXR0",
-            "cmlidXRlUmVxdWVzdC5Qcm9wZXJ0aWVzRW50cnkaMQoPUHJvcGVydGllc0Vu",
-            "dHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiDwoNTmFtZVZh",
-            "bHVlUGFpciI5ChRBZGRpbmdBdHRyaWJ1dGVSZXBseRIKCgJpZBgBIAEoCRIV",
-            "Cg1DYXRhbG9nSXRlbUlkGAIgASgJIioKFUdldENhdGFsb2dJdGVtUmVxdWVz",
-            "dBIRCglDYXRhbG9nSWQYASABKAkiOAoTR2V0Q2F0YWxvZ0l0ZW1SZXBseRIh",
-            "CgRJdGVtGAEgASgLMhMuQ2F0YWxvZy52MS5DYXRhbG9nQhKqAg9DYXRhbG9n",
-            "LmdSUEMudjFiBnByb3RvMw=="));
+            "IAEoCSKTAgohQWRkaW5nQXR0cmlidXRlRGVzY3JpcHRpb25SZXF1ZXN0EhQK",
+            "DENhdGFsb0l0ZW1JZBgBIAEoCRIVCg1BdHRyaWJ1dGVUeXBlGAIgASgJEhUK",
+            "DUF0dHJpYnV0ZU5hbWUYAyABKAkSEwoLRGVzY3JpcHRpb24YBCABKAkSDwoH",
+            "U3lub255bRgFIAEoCRJRCgpQcm9wZXJ0aWVzGAYgAygLMj0uQ2F0YWxvZy52",
+            "MS5BZGRpbmdBdHRyaWJ1dGVEZXNjcmlwdGlvblJlcXVlc3QuUHJvcGVydGll",
+            "c0VudHJ5GjEKD1Byb3BlcnRpZXNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFs",
+            "dWUYAiABKAk6AjgBIg8KDU5hbWVWYWx1ZVBhaXIiRAofQWRkaW5nQXR0cmli",
+            "dXRlRGVzY3JpcHRpb25SZXBseRIKCgJpZBgBIAEoCRIVCg1DYXRhbG9nSXRl",
+            "bUlkGAIgASgJIioKFUdldENhdGFsb2dJdGVtUmVxdWVzdBIRCglDYXRhbG9n",
+            "SWQYASABKAkiOAoTR2V0Q2F0YWxvZ0l0ZW1SZXBseRIhCgRJdGVtGAEgASgL",
+            "MhMuQ2F0YWxvZy52MS5DYXRhbG9nQhKqAg9DYXRhbG9nLmdSUEMudjFiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Catalog.gRPC.v1.TypesReflection.Descriptor, global::Google.Protobuf.WellKnownTypes.AnyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -73,9 +74,9 @@ namespace Catalog.gRPC.v1 {
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.Catalog), global::Catalog.gRPC.v1.Catalog.Parser, new[]{ "Id", "Name", "Synonym", "UseStandardCommands", "Code", "Description", "CreateOnInput", "DataLockControlMode", "FullTextSearch", "LevelCount", "FoldersOnTop", "CodeLength", "DescriptionLength", "CodeType", "CodeAllowedLength", "CheckUnique", "Autonumbering", "DefaultPresentation", "EditType", "ChoiceMode", "AttributeDescriptions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.CatalogCreationRequest), global::Catalog.gRPC.v1.CatalogCreationRequest.Parser, new[]{ "Name", "Synonym", "UseStandardCommands", "Code", "Description", "CreateOnInput", "DataLockControlMode", "FullTextSearch", "LevelCount", "FoldersOnTop", "CodeLength", "DescriptionLength", "CodeType", "CodeAllowedLength", "CheckUnique", "Autonumbering", "DefaultPresentation", "EditType", "ChoiceMode", "AttributeDescriptions" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.CatalogCreationReqply), global::Catalog.gRPC.v1.CatalogCreationReqply.Parser, new[]{ "Id", "Name" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.AddingAttributeRequest), global::Catalog.gRPC.v1.AddingAttributeRequest.Parser, new[]{ "CataloItemId", "AttributeType", "AttributeName", "Description", "Synonym", "Properties" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest), global::Catalog.gRPC.v1.AddingAttributeDescriptionRequest.Parser, new[]{ "CataloItemId", "AttributeType", "AttributeName", "Description", "Synonym", "Properties" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.NameValuePair), global::Catalog.gRPC.v1.NameValuePair.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.AddingAttributeReply), global::Catalog.gRPC.v1.AddingAttributeReply.Parser, new[]{ "Id", "CatalogItemId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.AddingAttributeDescriptionReply), global::Catalog.gRPC.v1.AddingAttributeDescriptionReply.Parser, new[]{ "Id", "CatalogItemId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.GetCatalogItemRequest), global::Catalog.gRPC.v1.GetCatalogItemRequest.Parser, new[]{ "CatalogId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Catalog.gRPC.v1.GetCatalogItemReply), global::Catalog.gRPC.v1.GetCatalogItemReply.Parser, new[]{ "Item" }, null, null, null, null)
           }));
@@ -2477,16 +2478,16 @@ namespace Catalog.gRPC.v1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class AddingAttributeRequest : pb::IMessage<AddingAttributeRequest>
+  public sealed partial class AddingAttributeDescriptionRequest : pb::IMessage<AddingAttributeDescriptionRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<AddingAttributeRequest> _parser = new pb::MessageParser<AddingAttributeRequest>(() => new AddingAttributeRequest());
+    private static readonly pb::MessageParser<AddingAttributeDescriptionRequest> _parser = new pb::MessageParser<AddingAttributeDescriptionRequest>(() => new AddingAttributeDescriptionRequest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<AddingAttributeRequest> Parser { get { return _parser; } }
+    public static pb::MessageParser<AddingAttributeDescriptionRequest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2502,7 +2503,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeRequest() {
+    public AddingAttributeDescriptionRequest() {
       OnConstruction();
     }
 
@@ -2510,7 +2511,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeRequest(AddingAttributeRequest other) : this() {
+    public AddingAttributeDescriptionRequest(AddingAttributeDescriptionRequest other) : this() {
       cataloItemId_ = other.cataloItemId_;
       attributeType_ = other.attributeType_;
       attributeName_ = other.attributeName_;
@@ -2522,8 +2523,8 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeRequest Clone() {
-      return new AddingAttributeRequest(this);
+    public AddingAttributeDescriptionRequest Clone() {
+      return new AddingAttributeDescriptionRequest(this);
     }
 
     /// <summary>Field number for the "CataloItemId" field.</summary>
@@ -2600,12 +2601,12 @@ namespace Catalog.gRPC.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as AddingAttributeRequest);
+      return Equals(other as AddingAttributeDescriptionRequest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(AddingAttributeRequest other) {
+    public bool Equals(AddingAttributeDescriptionRequest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2735,7 +2736,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(AddingAttributeRequest other) {
+    public void MergeFrom(AddingAttributeDescriptionRequest other) {
       if (other == null) {
         return;
       }
@@ -2994,16 +2995,16 @@ namespace Catalog.gRPC.v1 {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class AddingAttributeReply : pb::IMessage<AddingAttributeReply>
+  public sealed partial class AddingAttributeDescriptionReply : pb::IMessage<AddingAttributeDescriptionReply>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<AddingAttributeReply> _parser = new pb::MessageParser<AddingAttributeReply>(() => new AddingAttributeReply());
+    private static readonly pb::MessageParser<AddingAttributeDescriptionReply> _parser = new pb::MessageParser<AddingAttributeDescriptionReply>(() => new AddingAttributeDescriptionReply());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<AddingAttributeReply> Parser { get { return _parser; } }
+    public static pb::MessageParser<AddingAttributeDescriptionReply> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -3019,7 +3020,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeReply() {
+    public AddingAttributeDescriptionReply() {
       OnConstruction();
     }
 
@@ -3027,7 +3028,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeReply(AddingAttributeReply other) : this() {
+    public AddingAttributeDescriptionReply(AddingAttributeDescriptionReply other) : this() {
       id_ = other.id_;
       catalogItemId_ = other.catalogItemId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -3035,8 +3036,8 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AddingAttributeReply Clone() {
-      return new AddingAttributeReply(this);
+    public AddingAttributeDescriptionReply Clone() {
+      return new AddingAttributeDescriptionReply(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -3066,12 +3067,12 @@ namespace Catalog.gRPC.v1 {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as AddingAttributeReply);
+      return Equals(other as AddingAttributeDescriptionReply);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(AddingAttributeReply other) {
+    public bool Equals(AddingAttributeDescriptionReply other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -3157,7 +3158,7 @@ namespace Catalog.gRPC.v1 {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(AddingAttributeReply other) {
+    public void MergeFrom(AddingAttributeDescriptionReply other) {
       if (other == null) {
         return;
       }

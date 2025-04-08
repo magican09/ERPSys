@@ -15,6 +15,12 @@ public abstract class Attribute<T>:Entity,IAttribute,IValueable<T>
         this.AddDomainEvent(new AttributeValueChangeEvent(this));
     }
 
+    public void SetName(string name)
+    {
+        Name = name;
+        this.AddDomainEvent(new AttributeNameChagedEvent(this));
+    }
+    
     public Type  ValueType => typeof(T);
     public  Type Type => this.GetType();
     public Attribute()
@@ -26,6 +32,11 @@ public abstract class Attribute<T>:Entity,IAttribute,IValueable<T>
     {
         Name = name;
         
+    }
+
+    public Attribute(string name, T value) : this(name)
+    {
+        Value = value;
     }
     
 }

@@ -14,14 +14,14 @@ public  abstract class AttributeDescription<T>:Entity, IAttributeDescription whe
     {
         
     }
-    public AttributeDescription(IAttribute attribute)
+    public AttributeDescription(IAttribute attribute):this()
     {
         
         AttributeName = attribute.Name; ;
       
     }
 
-    public AttributeDescription(string attributeName)
+    public AttributeDescription(string attributeName):this()
     {
         AttributeName = attributeName;
     }

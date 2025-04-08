@@ -36,10 +36,25 @@ public class AddAttributeDescriptionCommandHandler:IRequestHandler<AddAttributeD
         newAtribiteDescription.AttributeName = attributeDesctiptionDTO.AttributeName;
         newAtribiteDescription.Description = attributeDesctiptionDTO.Description;
         newAtribiteDescription.Synonym = attributeDesctiptionDTO.Synonym;
-        AttributeDescriptionHelper.SetAttributeDescriptionProperties(newAtribiteDescription,attributeDesctiptionDTO.Properties);
+        CatalogItem.SetAttributeDescriptionProperties(newAtribiteDescription,
+            attributeDesctiptionDTO.Properties
+                .Select(p_kvp =>
+                    new KeyValuePair<string, object>(p_kvp.Key, p_kvp.Value))
+                .ToDictionary()
+                );     
+        
+        //AttributeDescriptionHelper.SetAttributeDescriptionProperties(newAtribiteDescription,attributeDesctiptionDTO.Properties);
+
+        try
+        {
+            catalogItem.AddAttributeDescription(newAtribiteDescription);
+
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, $"Error while adding attribute description {newAtribiteDescription.AttributeName}");
+        }
      
-        catalogItem.AddAttribute(newAtribiteDescription);
-    
         await _catalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken); 
         
         return (catalogItem.Id, newAtribiteDescription.Id);

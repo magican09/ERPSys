@@ -9,7 +9,7 @@ using
 {
     var catalog = new CatalogItem("cat_1");
     
-    catalog.AddAttribute( new IntAttribute("int_attr"));
+   
     context.Add(catalog);
     context.SaveChanges();
 

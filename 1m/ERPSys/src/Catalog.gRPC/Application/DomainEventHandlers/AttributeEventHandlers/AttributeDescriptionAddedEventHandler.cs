@@ -26,13 +26,16 @@ public class AttributeDescriptionAddedEventHandler:INotificationHandler<Attribut
     {
 
        var  allRecords =  await _catalogRecords.GetAllAsync();
-       
-       var attribute = (IAttribute)Activator.CreateInstance(notification.AttributeDescription.AttributeType,
-          new object[] { notification.AttributeDescription.AttributeName } );
 
+       var attribuDescription = notification.AttributeDescription;
+       
+       var atributeTyp = attribuDescription.AttributeType;
+
+       var attributeName = attribuDescription.AttributeName;
+       
        foreach (var record in allRecords)
        {
-           record.AddAttribute(attribute);
+           record.CreateAttribute(atributeTyp, attributeName,record.GetDefault(atributeTyp));
        }
        
     }

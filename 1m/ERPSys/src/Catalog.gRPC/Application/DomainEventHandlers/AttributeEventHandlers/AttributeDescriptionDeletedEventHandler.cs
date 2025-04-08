@@ -24,12 +24,15 @@ public async Task Handle(AttributeDescriptionDeletedEvent notification, Cancella
 
     var  allRecords =  await _catalogRecords.GetAllAsync();
        
-    var attribute = (IAttribute)Activator.CreateInstance(notification.AttributeDescription.AttributeType,
-        new object[] { notification.AttributeDescription.AttributeName } );
+    var attribuDescription = notification.AttributeDescription;
+       
+    var atributeType = attribuDescription.AttributeType;
 
+    var attributeName = attribuDescription.AttributeName;
+    
     foreach (var record in allRecords)
     {
-        record.DeleteAttribute(attribute);
+        record.DeleteAttribute(atributeType,attributeName);
     }
        
 }

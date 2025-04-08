@@ -23,10 +23,6 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
       IServerStreamWriter<CatalogCreationReqply> responseStream, ServerCallContext context)
   {
     Guid requestId = Guid.Empty;
-
-    /*var type_str_full = typeof(IntAttribute).AssemblyQualifiedName;
-    
-    var tt = System.Type.GetType(type_str_full);*/
     
     if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
           requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
@@ -112,13 +108,9 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
     await  Task.CompletedTask; //base.CreateCatalod(requestStream, responseStream, context);
   }
 
-  public override async Task AddAttribute(IAsyncStreamReader<AddingAttributeRequest> requestStream, IServerStreamWriter<AddingAttributeReply> responseStream, ServerCallContext context)
+  public override async Task AddAttribute(IAsyncStreamReader<AddingAttributeDescriptionRequest> requestStream, IServerStreamWriter<AddingAttributeDescriptionReply> responseStream, ServerCallContext context)
   {
       Guid requestId = Guid.Empty;
-
-      var type_str_full = typeof(IntAttribute).AssemblyQualifiedName;
-    
-      var tt = System.Type.GetType(type_str_full);
     
       if(context.RequestHeaders.FirstOrDefault(h=>h.Key=="x-request-id")!=null)
           requestId = Guid.Parse(context.RequestHeaders.SingleOrDefault(h => h.Key == "x-request-id").Value);
@@ -128,56 +120,54 @@ public class CatalogService:Catalog.gRPC.v1.CatalogService.CatalogServiceBase
           services.Logger.LogWarning("Invalid integration event - RequestId is missing - {@IntegrationEvent}", requestStream);
       }
 
-      using (services.Logger.BeginScope(
-                 new List<KeyValuePair<string, object>> { new("identifiedCommandId", requestId) }))
-      {
-          await foreach (var request in requestStream.ReadAllAsync())
+      using (services.Logger.BeginScope(new List<KeyValuePair<string, object>> { new("identifiedCommandId", requestId) }))
           {
-              var attributeDescription = new AttributeDescriptionAppModel
+              await foreach (var request in requestStream.ReadAllAsync())
               {
-                  CatalogItemId = request.CataloItemId,
-                  AttributeName = request.AttributeName,
-                  Description = request.Description,
-                  Synonym = request.Synonym,
-                  AttributeTypeName = request.AttributeType,
-                  Properties = request.Properties.Select(p =>
-                          new KeyValuePair<string, string>(p.Key, p.Value))
-                      .ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
-              };
-              var addAttributeDescriptionCommand = new AddAttributeDescriptionCommand(attributeDescription);
-                
-              var requestAddAttributeDescription= new IdentifiedCommand<AddAttributeDescriptionCommand,(int,int)>
-                                                                                    (addAttributeDescriptionCommand, requestId);
-            
-              services.Logger.LogInformation(
-                  "Sending command:{CommandName} - {IdProperty}: {CommandId} ({@Command})",
-                  requestAddAttributeDescription.GetGenericTypeName(),
-                  nameof(requestAddAttributeDescription.Id),
-                  requestAddAttributeDescription.Id,
-                  requestAddAttributeDescription);
-    
-                var result = await services.Mediator.Send(requestAddAttributeDescription);
+                  var attributeDescription = new AttributeDescriptionAppModel
+                  {
+                      CatalogItemId = request.CataloItemId,
+                      AttributeName = request.AttributeName,
+                      Description = request.Description,
+                      Synonym = request.Synonym,
+                      AttributeTypeName = request.AttributeType,
+                      Properties = request.Properties.Select(p =>
+                              new KeyValuePair<string, string>(p.Key, p.Value))
+                          .ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
+                  };
+                  var addAttributeDescriptionCommand = new AddAttributeDescriptionCommand(attributeDescription);
 
-                if (result.Item1 != default(int) && result.Item2 != default(int))
-                {
-                    services.Logger.LogInformation("CreateOrderCommand succeeded - RequestId: {RequestId}", requestId);
-                }
-                else
-                {
-                    services.Logger.LogWarning("CreateOrderCommand failed - RequestId: {RequestId}", requestId);
-                }
+                  var requestAddAttributeDescription = new IdentifiedCommand<AddAttributeDescriptionCommand, (int, int)>
+                      (addAttributeDescriptionCommand, requestId);
 
-                await responseStream.WriteAsync(new AddingAttributeReply
-                {
-                    Id = result.ToString(),
-                    CatalogItemId = result.Item2.ToString(),
-                });
+                  services.Logger.LogInformation(
+                      "Sending command:{CommandName} - {IdProperty}: {CommandId} ({@Command})",
+                      requestAddAttributeDescription.GetGenericTypeName(),
+                      nameof(requestAddAttributeDescription.Id),
+                      requestAddAttributeDescription.Id,
+                      requestAddAttributeDescription);
 
-          }
-          
+                  var result = await services.Mediator.Send(requestAddAttributeDescription);
+
+                  if (result.Item1 != default(int) && result.Item2 != default(int))
+                  {
+                      services.Logger.LogInformation("CreateOrderCommand succeeded - RequestId: {RequestId}", requestId);
+                  }
+                  else
+                  {
+                      services.Logger.LogWarning("CreateOrderCommand failed - RequestId: {RequestId}", requestId);
+                  }
+
+                  await responseStream.WriteAsync(new AddingAttributeDescriptionReply
+                  {
+                      Id = result.ToString(),
+                      CatalogItemId = result.Item2.ToString(),
+                  });
+                  
+              }
           
       }
-   
+     
      
   }
 

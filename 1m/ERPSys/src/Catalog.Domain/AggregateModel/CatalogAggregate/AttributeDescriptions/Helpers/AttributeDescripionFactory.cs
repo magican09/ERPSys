@@ -7,8 +7,8 @@ public static class AttributeDescripionFactory
 {
     public static IAttributeDescription  CreateAttributeDescription(string atributeClassName)
     {
-        var assemlyTypes = Assembly.GetAssembly(typeof(AttributeDescripionFactory)).ExportedTypes.ToList(); // this.GetType().Assembly.ExportedTypes.ToList();
-
+        var assemlyTypes = DomainHelpers.DomainAssebliesTypes; 
+            
         var atrDescrClassFullName = assemlyTypes
             .SelectMany(t => t.GetProperties())
             .Where(p => p.Name == "AttributeType")
